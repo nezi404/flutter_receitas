@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.app4_receitas"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
