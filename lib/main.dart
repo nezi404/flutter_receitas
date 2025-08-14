@@ -1,3 +1,4 @@
+import 'package:app4_receitas/di/service_locator.dart';
 import 'package:app4_receitas/routes/app_router.dart';
 import 'package:app4_receitas/utils/config/env.dart';
 import 'package:app4_receitas/utils/theme/custom_theme_controller.dart';
@@ -12,6 +13,7 @@ Future<void> main() async {
 
   await Env.init();
   await Supabase.initialize(url: Env.supabaseUrl, anonKey: Env.supabaseAnonKey);
+  await setupDependencies();
   runApp(const MainApp());
 }
 

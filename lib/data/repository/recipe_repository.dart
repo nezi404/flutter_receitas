@@ -10,8 +10,21 @@ class RecipeRepository{
       final rawData = await _service.fetchRecipes();
       return rawData.map((data)=> Recipe.fromJson(data)).toList();
     } catch(e) {
-      throw Exception('Falha ao carregar recceitas: ${e.toString()}');
+      throw Exception('Falha ao carregar recceitas 🗒️❌: ${e.toString()}');
     }
   }
   
+  Future<Recipe?> getRecipeById(String id) async {
+    final rawData = await _service.fetchRecipesById(id);
+    return rawData != null ? Recipe.fromJson(rawData) : null;
+  }
+
+  Future<List<Recipe>> getFavouriteRecipes(String userId) async {
+    final rawData = await _service.fetchFavouriteRecipesById(userId);
+    return rawData
+      .where((data) => data['recipes'] != null)
+      .map((data) => Recipe.fromJson(data['recipes'] as Map<String, dynamic>))
+      .toList();
+  }
+
 }

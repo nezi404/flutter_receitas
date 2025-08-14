@@ -10,4 +10,34 @@ class RecipeService {
     .select()
     .order('id', ascending: true);
   }
+
+  Future<Map<String, dynamic>?> fetchRecipesById(String id) async {
+    return await _supabaseClient.from('recipes').select().eq('id', id).single();
+  }
+
+  Future<List<Map<String, dynamic>>> fetchFavouriteRecipesById( String userId) async {
+    return await _supabaseClient
+    .from('favorites')
+    .select('''
+  recipes(
+      id, 
+      name,
+      ingredient,
+      intructions,
+      prep_time_minutes,
+      cook_time_minutes,
+      servings,
+      difficulty,
+      cuisine,
+      calories_per_serving,
+      tags,
+      user_id,
+      image,
+      rating,
+      review_count,
+      meal_type
+      
+  )'''
+  );
+  }
 }

@@ -18,7 +18,7 @@ class _BaseScreenState extends State<BaseScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eu Amo Cozinhar', style: GoogleFonts.dancingScript()),
+        title: Text('Eu Amo Cozinhar', style: GoogleFonts.comicNeue()),
       ),
       body: widget.child,
       endDrawer: const CustomDrawer(),

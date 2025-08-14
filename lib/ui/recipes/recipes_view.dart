@@ -2,7 +2,7 @@ import 'package:app4_receitas/di/service_locator.dart';
 import 'package:app4_receitas/ui/recipes/recipes_view_model.dart';
 import 'package:app4_receitas/ui/widgets/recipe_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 class RecipesView extends StatefulWidget {
@@ -13,15 +13,14 @@ class RecipesView extends StatefulWidget {
 }
 
 class _RecipesViewState extends State<RecipesView> {
+
   final viewModel = getIt<RecipesViewModel>();
-
-
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-       viewModel.getRecipes();
+      viewModel.getRecipes();
     });
   }
 
@@ -53,27 +52,26 @@ class _RecipesViewState extends State<RecipesView> {
                   onPressed: () {
                     viewModel.getRecipes();
                   },
-                  child: Text('TENTAR NOVAMENTE'),
+                  child: Text('TENTAR NOVAMENTE 🧑‍🍳'),
                 ),
               ],
             ),
           ),
         );
       }
-      
 
       return Container(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
             Expanded(
-              child: 
+              child:
               viewModel.recipes.isNotEmpty
                   ? Center(
                       child: Column(
                         children: [
                           Text(
-                            '${viewModel.recipes.length} receitas(s)',
+                            '${viewModel.recipes.length} receitas(s) 🗒️',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -167,7 +165,7 @@ class _RecipesViewState extends State<RecipesView> {
                         ],
                       ),
                     )
-                  : 
+                  :
                   Center(
                       child: Column(
                         children: [
@@ -179,7 +177,7 @@ class _RecipesViewState extends State<RecipesView> {
                           ),
                           const SizedBox(height: 32),
                           Text(
-                            'Adicione suas receitas favoritas!',
+                            'Adicione suas receitas favoritas! 🥞',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
