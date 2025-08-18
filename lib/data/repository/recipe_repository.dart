@@ -27,4 +27,16 @@ class RecipeRepository{
       .toList();
   }
 
+  Future<void> insertFavouriteRecipe(String recipeId, String userId) async {
+
+    await _service.insertFavouriteRecipe(recipeId, userId);
+
+  }
+
+  Future<void> deleteFavouriteRecipe(String recipeId, String userId) async {
+
+    await _service.deleteFavouriteRecipe(recipeId, userId);
+
+  }
+
 }

@@ -64,7 +64,7 @@ class CustomDrawer extends StatelessWidget {
             title: Text('Favoritas'),
             onTap: () {
               Navigator.of(context).pop();
-              context.go('/favorites');
+              context.go('/favourites');
             },
           ),
           ListTile(

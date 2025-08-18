@@ -22,8 +22,8 @@ class RecipeService {
   recipes(
       id, 
       name,
-      ingredient,
-      intructions,
+      ingredients,
+      instructions,
       prep_time_minutes,
       cook_time_minutes,
       servings,
@@ -39,5 +39,20 @@ class RecipeService {
       
   )'''
   );
+  }
+
+  Future<void> insertFavouriteRecipe(String recipeId, String userId) async {
+    await _supabaseClient.from("favorites").insert({
+      'recipe_id': recipeId,
+      'user_id': userId,
+    });
+  }
+
+  Future<void> deleteFavouriteRecipe(String recipeId, String userId) async {
+    await _supabaseClient
+      .from("favorites")
+      .delete()
+      .eq("recipe_id", recipeId)
+      .eq("user_id", userId);
   }
 }
