@@ -3,6 +3,7 @@ import 'package:app4_receitas/di/service_locator.dart';
 import 'package:app4_receitas/ui/auth/auth_view.dart';
 import 'package:app4_receitas/ui/base_screen.dart';
 import 'package:app4_receitas/ui/favourite_recipes/favourite_recipes_view.dart';
+import 'package:app4_receitas/ui/profile/profile_view.dart';
 import 'package:app4_receitas/ui/recipes/recipes_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,8 @@ class AppRouter {
             GoRoute(path: '/recipe/:id', builder: (context, state) => 
                 RecipeDetailView(id: state.pathParameters['id']!)),
             GoRoute(path: '/favourites', builder: (context, state) => FavouriteRecipesView()),
-          ],
+            GoRoute(path: '/profile', builder: (context, state) => ProfileView()),
+          ]
         ),
       ],
       redirect: (context, state) {
@@ -44,8 +46,8 @@ class AppRouter {
         final currentPath = state.uri.path;
 
         if (!isLoggedIn && currentPath != "/login"){
-          return "login";
-        } if (isLoggedIn && currentPath != "/login"){
+          return "/login";
+        } if (isLoggedIn && currentPath == "/login"){
           return "/";
         } 
 
