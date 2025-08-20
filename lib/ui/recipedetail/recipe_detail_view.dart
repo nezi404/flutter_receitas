@@ -92,12 +92,25 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
               child: Column(
                 children: [
                   Text(recipe.name),
+                  Row(mainAxisAlignment : MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(onPressed: () => context.go('/'),
+                      child: Text("VOLTAR ⬅️"),),
+                      ElevatedButton(
+                        onPressed: () => viewModel.toggleFavorite(),
+                        child: Text(viewModel.isFavorite
+                        ? "DESFAVORITAR 💔"
+                        : "FAVORITAR ❤️")
+                        ),
+                  ],),
                   const SizedBox(height: 16,),
                   RecipesRowDetails(recipe: recipe),
                   const SizedBox(height: 16),
                   recipe.ingredients.isNotEmpty 
                   ? Column(crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const SizedBox(height: 16),
+                  
                     Text("Ingredientes:"),
                     const SizedBox(height: 8,),
                     Text(recipe.ingredients.join('\n'))
@@ -112,18 +125,6 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                     Text(recipe.ingredients.join('\n'))
                   ],)
                   : Text("Nenhuma instrução encontrada para essa receita!"),
-                  const SizedBox(height: 16),
-                  Row(mainAxisAlignment : MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(onPressed: () => context.go('/'),
-                      child: Text("VOLTAR ⬅️"),),
-                      ElevatedButton(
-                        onPressed: () => viewModel.toggleFavorite(),
-                        child: Text(viewModel.isFavorite
-                        ? "DESFAVORITAR 💔"
-                        : "FAVORITAR ❤️")
-                        ),
-                  ],)
                 ],)
             )
         ],

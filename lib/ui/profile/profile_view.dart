@@ -33,7 +33,10 @@ class _ProfileViewState extends State<ProfileView> {
         return Center(child: Column(
           children:[
             Text(viewModel.errorMessage),
-            ElevatedButton(onPressed: () {}, child: Text("SAIR"))
+            ElevatedButton(onPressed: () async {
+                    await viewModel.signOut();
+                    }
+                    , child: Text("SAIR"))
             ],
           ),
         );
@@ -83,7 +86,9 @@ class _ProfileViewState extends State<ProfileView> {
               height: 50,
               width: double.infinity,
               child: ElevatedButton.icon(
-                  onPressed: () {}, 
+                  onPressed: () async {
+                    await viewModel.signOut();
+                    }, 
                   label: const Text("SAIR", 
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold) ,),
                   icon: const Icon(Icons.exit_to_app_rounded),

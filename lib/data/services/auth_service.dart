@@ -57,7 +57,6 @@ class AuthService {
     }
   }
 
-  // Sign Up - Registro de novo usuário
   Future<Either<AppError, AuthResponse>> signUp({
     required String email,
     required String password,
@@ -65,7 +64,7 @@ class AuthService {
     required String avatarUrl,
   }) async {
     try {
-      // Verificar se o username está disponível
+      // Verificar se o username esta disponivel (nao foi usado)
       final existingUsername = await _supabaseClient
           .from('profiles')
           .select()
@@ -73,7 +72,7 @@ class AuthService {
           .maybeSingle();
 
       if (existingUsername != null) {
-        return Left(AppError('Username não disponível'));
+        return Left(AppError('Username já existe, não está disponível'));
       }
 
       final result = await insertUser(email: email, password: password);
@@ -81,7 +80,7 @@ class AuthService {
         await _supabaseClient.from('profiles').insert({
           'id': result.right.user!.id,
           'username': username,
-          'avatarUrl': avatarUrl,
+          'avatar_url': avatarUrl,
         });
         return Right(right);
       });
@@ -93,6 +92,7 @@ class AuthService {
           return Left(AppError('Erro ao registrar usuário', e));
       }
     } catch (e) {
+      //error relacionado ao banco de dados no geral
       return Left(AppError('Erro inesperado ao registrar usuário', e));
     }
   }
@@ -111,10 +111,10 @@ class AuthService {
       switch (e.message) {
         case 'Email not confirmed':
           return Left(
-            AppError('E-mail não confirmado. Verifique sua caixa de entrada'),
+            AppError('E-mail não confirmado. Verifique sua caixa de entrada 📩'),
           );
         default:
-          return Left(AppError('Erro ao fazer cadastro', e));
+          return Left(AppError('Erro ao fazer cadastro ❌', e));
       }
     }
   }
